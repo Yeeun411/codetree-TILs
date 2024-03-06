@@ -10,7 +10,7 @@ public class Main {
             m = a;
         }
         int max = 1;
-        for(int i =1;i<n;i++) {
+        for(int i =1;i<n+1;i++) {
             if(n%i==0 && m%i==0) {
                 max = i;
             }
