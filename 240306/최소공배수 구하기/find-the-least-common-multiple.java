@@ -10,7 +10,7 @@ public class Main {
             m = a;
         }
         int answer = 1;
-        for(int i = 2;i<m;i++){
+        for(int i = 2;i<m+1;i++){
             if(n%i==0&&m%i==0){
                 answer *= i;
                 if(answer>=m){
