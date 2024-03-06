@@ -15,6 +15,7 @@ public class Main {
                 answer *= i;
                 if(answer>=m){
                     System.out.println(answer);
+                    break;
                 }
 
             }
