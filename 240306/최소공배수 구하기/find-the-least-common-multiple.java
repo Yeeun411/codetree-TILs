@@ -14,11 +14,14 @@ public class Main {
             if(n%i==0&&m%i==0){
                 answer *= i;
                 if(answer>=m){
-                    System.out.println(answer);
                     break;
                 }
 
             }
         }
+        if(answer == 1){
+            answer = m*n;
+        }
+        System.out.println(answer);
     }
 }
