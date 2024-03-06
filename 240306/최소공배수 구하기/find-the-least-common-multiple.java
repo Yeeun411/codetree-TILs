@@ -1,27 +1,22 @@
 import java.util.Scanner;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         int m = scanner.nextInt();
-        if(n>m){
-            int a = n;
-            n = m;
-            m = a;
+        System.out.println(lcm(n, m));
+    }
+    
+    private static int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
         }
-        int answer = 1;
-        for(int i = 2;i<m+1;i++){
-            if(n%i==0&&m%i==0){
-                answer *= i;
-                if(answer>=m){
-                    break;
-                }
-
-            }
-        }
-        if(answer == 1){
-            answer = m*n;
-        }
-        System.out.println(answer);
+        return gcd(b, a % b);
+    }
+    
+    private static int lcm(int a, int b) {
+        return a / gcd(a, b) * b;
     }
 }
