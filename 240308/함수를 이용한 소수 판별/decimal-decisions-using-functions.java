@@ -5,12 +5,16 @@ public class Main {
         int a = scanner.nextInt();
         int b = scanner.nextInt();
         int answer = 0;
-        for(int i = a;i<b+1;i++){
-            if(isPrime(i)==true){
-                answer += i;
+        if(a==b){
+            System.out.println("0");
+        }else{
+            for(int i = a;i<b+1;i++){
+                if(isPrime(i)==true){
+                    answer += i;
+                }
             }
+            System.out.println(answer);
         }
-        System.out.println(answer);
 
     }
     public static boolean isPrime(int n){
