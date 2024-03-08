@@ -6,19 +6,23 @@ public class Main {
         String calculate = scanner.next();
         int b = scanner.nextInt();
 
-        System.out.println(a+" "+calculate+" "+b+" = "+calculator(a,calculate,b));
-    }
-    public static int calculator(int a, String cal, int b){
         int answer = 0;
-        if(cal.equals("*")){
+
+        if(calculate.equals("*")){
             answer = a*b;
-        } else if(cal.equals("+")){
+            System.out.println(a+" "+calculate+" "+b+" = "+answer);
+        } else if(calculate.equals("+")){
             answer = a+b;
-        } else if(cal.equals("-")){
+            System.out.println(a+" "+calculate+" "+b+" = "+answer);
+        } else if(calculate.equals("-")){
             answer = a-b;
-        } else if(cal.equals("/")){
+            System.out.println(a+" "+calculate+" "+b+" = "+answer);
+        } else if(calculate.equals("/")){
             answer = a/b;
-        } 
-        return answer;
+            System.out.println(a+" "+calculate+" "+b+" = "+answer);
+        } else{
+            System.out.println("False");
+        }
     }
+
 }
