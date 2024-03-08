@@ -10,12 +10,15 @@ public class Main {
     }
     public static int calculator(int a, String cal, int b){
         int answer = 0;
-        switch(cal){
-            case "+": answer = a+b;
-            case "-": answer = a-b;
-            case "/": answer = a/b;
-            case "*": answer = a*b;
-        }
+        if(cal.equals("*")){
+            answer = a*b;
+        } else if(cal.equals("+")){
+            answer = a+b;
+        } else if(cal.equals("-")){
+            answer = a-b;
+        } else if(cal.equals("/")){
+            answer = a/b;
+        } 
         return answer;
     }
 }
