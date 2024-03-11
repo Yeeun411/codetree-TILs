@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -7,30 +8,33 @@ public class Main {
         int[] arrA = new int[nOfA];
         int[] arrB = new int[nOfB];
 
-        for(int i = 0; i<nOfA; i++){
+        for(int i = 0; i < nOfA; i++){
             arrA[i] = scanner.nextInt();
         }
 
-        for(int j = 0; j<nOfB; j++){
+        for(int j = 0; j < nOfB; j++){
             arrB[j] = scanner.nextInt();
         }
-        int count = 0;
 
-        for(int elementA:arrA){
-            for(int elementB:arrB){
-                if(elementA==elementB){
-                    count++;
+        // 호출
+        boolean result = isSubsequence(arrA, arrB);
+        System.out.println(result ? "Yes" : "No");
+    }
+
+    // 함수 작성
+    public static boolean isSubsequence(int[] arrA, int[] arrB) {
+        for (int i = 0; i <= arrA.length - arrB.length; i++) {
+            boolean isSub = true;
+            for (int j = 0; j < arrB.length; j++) {
+                if (arrA[i + j] != arrB[j]) {
+                    isSub = false;
+                    break;
                 }
             }
-            if(count==nOfB){
-                break;
+            if (isSub) {
+                return true;
             }
         }
-
-        if(count==nOfB){
-            System.out.println("Yes");
-        }else{
-            System.out.println("No");
-        }
+        return false;
     }
 }
