@@ -6,7 +6,7 @@ public class Main {
         char[] arr = palindrome.toCharArray();
         for(int i=0;i<arr.length;i++){
             int j = arr.length-i-1;
-            if(i<=j){
+            if(i>=j){
                 System.out.println("Yes");
                 break;
             }else{
