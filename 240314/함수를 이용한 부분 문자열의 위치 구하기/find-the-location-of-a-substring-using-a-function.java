@@ -6,31 +6,30 @@ public class Main {
         char[] inputArr = input.toCharArray();
         String objective = scanner.next();
         char[] objectiveArr = objective.toCharArray();
-        boolean keepFinding = true;
+        boolean found = false;
         int n = 0;
-        while(keepFinding){
-            if(n>inputArr.length){
-                System.out.println("-1");
-                keepFinding = false;
-            }else{
-                int tmp = n;
-                for(int i = 0;i<objectiveArr.length;i++){
-                    if(inputArr[tmp]!=objectiveArr[i]){
-                        break;
-                    }else{
-                        tmp++;
-                        
-                        if(tmp-n==objectiveArr.length){
-                            System.out.println(n);
-                            keepFinding = false;
-                        }
-                    }
+        
+        while(n <= inputArr.length - objectiveArr.length && !found) {
+            int tmp = n;
+            for(int i = 0; i < objectiveArr.length && tmp < inputArr.length; i++) {
+                if(inputArr[tmp] != objectiveArr[i]) {
+                    break;
                 }
+                tmp++;
+                
+                if(tmp - n == objectiveArr.length) {
+                    System.out.println(n);
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) {
                 n++;
             }
         }
 
-
-
+        if(!found) {
+            System.out.println("-1");
+        }
     }
 }
