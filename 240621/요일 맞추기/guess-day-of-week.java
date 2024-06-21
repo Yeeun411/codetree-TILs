@@ -1,10 +1,5 @@
 import java.util.Scanner;
 
-/*
- * 2011년 m1월 d1일로부터 2011년 m2월 d2일까지는 총 며칠이 있는지를 계산하는 프로그램을 작성해보세요.
- * 2011년은 윤년이 아닌 해이기 때문에 2월은 28일까지 있습니다.
- * 단, 날짜 계산시 시작일을 포함하여 세도록 합니다.
- * */
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -15,23 +10,35 @@ public class Main {
         int change1 = checkDays(m1)+d1;
         int change2 = checkDays(m2)+d2;
         int result = change2 - change1+1;
-        int a = result%7;
-        switch(a){
+        int a = result % 7;
+        if(change2<change1){
+            result = change1 - change2 + 5;
+            a = 6 -(result%7);
+        }
+        switch(a) {
             case 1:
                 System.out.println("Mon");
+                break;
             case 2:
                 System.out.println("Tue");
+                break;
             case 3:
                 System.out.println("Wed");
+                break;
             case 4:
                 System.out.println("Thu");
+                break;
             case 5:
                 System.out.println("Fri");
+                break;
             case 6:
                 System.out.println("Sat");
+                break;
             case 0:
                 System.out.println("Sun");
+                break;
         }
+
     }
 
     public static int checkDays(int month){
