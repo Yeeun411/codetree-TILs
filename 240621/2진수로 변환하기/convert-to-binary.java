@@ -6,16 +6,18 @@ public class Main {
         int n = input.nextInt();
         System.out.println(toBinary(n));
     }
-    public static int toBinary(int n){
+    
+    public static String toBinary(int n) {
+        if (n == 0) {
+            return "0";
+        }
+        
         String binary = "";
-        while(true){
-            if(n == 0){
-                break;
-            }
+        while (n > 0) {
             int remainder = n % 2;
             binary = remainder + binary;
             n = n / 2;
         }
-        return Integer.parseInt(binary);
+        return binary;
     }
 }
