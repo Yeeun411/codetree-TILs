@@ -4,51 +4,46 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int n = input.nextInt();
-        n = toDecimal(n)*17;
+        n = toDecimal(n) * 17;
 
-        System.out.println(toBinary(n));
+        System.out.println(toBinaryString(n));
     }
-    public static int toBinary(int n){
+
+    public static String toBinaryString(int n) {
+        if (n == 0) {
+            return "0";
+        }
         String binary = "";
-        while(true){
-            if(n == 0){
-                break;
-            }
+        while (n > 0) {
             int remainder = n % 2;
             binary = remainder + binary;
             n = n / 2;
         }
-        return Integer.parseInt(binary);
-    }
-    public static int toKinary(int n,int k){
-        String binary = "";
-        while(true){
-            if(n == 0){
-                break;
-            }
-            int remainder = n % k;
-            binary = remainder + binary;
-            n = n / k;
-        }
-        return Integer.parseInt(binary);
+        return binary;
     }
 
-    public static int toDecimal(int n){
+    public static String toKinaryString(int n, int k) {
+        if (n == 0) {
+            return "0";
+        }
+        String kinary = "";
+        while (n > 0) {
+            int remainder = n % k;
+            kinary = remainder + kinary;
+            n = n / k;
+        }
+        return kinary;
+    }
+
+    public static int toDecimal(int n) {
         int decimal = 0;
         int p = 0;
-        while(true){
-            if((n%10)==1){
-                int j=1;
-                for(int i=0;i<p;i++){
-                    j*=2;
-                }
-                decimal += j;
-            }
-            p+=1;
-            n=n/10;
-            if(n<=0){
-                return decimal;
-            }
+        while (n > 0) {
+            int lastDigit = n % 10;
+            decimal += lastDigit * Math.pow(2, p);
+            p++;
+            n = n / 10;
         }
+        return decimal;
     }
 }
