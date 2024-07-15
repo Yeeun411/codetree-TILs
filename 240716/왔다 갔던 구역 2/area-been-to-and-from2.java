@@ -1,41 +1,47 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        sc.nextLine();
+        Scanner scanner = new Scanner(System.in);
         
-        int[] positionCount = new int[4001];
-        int currentPosition = 2000; // Starting at position 0
+        int n = scanner.nextInt();
+        scanner.nextLine();
+        
+        Map<Integer, Integer> visited = new HashMap<>();
+        int currentPosition = 0;
+        
+        visited.put(currentPosition, 1);
         
         for (int i = 0; i < n; i++) {
-            String command = sc.nextLine();
+            String command = scanner.nextLine();
             String[] parts = command.split(" ");
-            int x = Integer.parseInt(parts[0]);
-            char direction = parts[1].charAt(0);
+            int distance = Integer.parseInt(parts[0]);
+            String direction = parts[1];
             
-            if (direction == 'L') {
-                for (int j = 1; j <= x; j++) {
-                    positionCount[currentPosition - j]++;
+            if (direction.equals("L")) {
+                for (int j = 0; j < distance; j++) {
+                    currentPosition -= 1;
+                    visited.put(currentPosition, visited.getOrDefault(currentPosition, 0) + 1);
                 }
-                currentPosition -= x;
-            } else if (direction == 'R') {
-                for (int j = 1; j <= x; j++) {
-                    positionCount[currentPosition + j]++;
+            } else if (direction.equals("R")) {
+                for (int j = 0; j < distance; j++) {
+                    currentPosition += 1;
+                    visited.put(currentPosition, visited.getOrDefault(currentPosition, 0) + 1);
                 }
-                currentPosition += x;
             }
         }
         
-        int overlapCount = 0;
-        for (int i = 0; i < positionCount.length; i++) {
-            if (positionCount[i] >= 2) {
-                overlapCount++;
+        int count = 0;
+        for (int visitCount : visited.values()) {
+            if (visitCount >= 2) {
+                count++;
             }
         }
         
-        System.out.println(overlapCount);
+        System.out.println(count);
+        
+        scanner.close();
     }
 }
