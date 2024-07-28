@@ -1,68 +1,82 @@
-import java.util.*;
+import java.util.Scanner;
+import java.util.Arrays;
+
+// 악수의 정보를 나타내는 클래스 선언
+class Shake implements Comparable<Shake> {
+    int time;
+    int person1;
+    int person2;
+    
+    public Shake(int time, int person1, int person2) {
+        this.time = time;
+        this.person1 = person1;
+        this.person2 = person2;
+    }
+
+    @Override
+    public int compareTo(Shake shake) {
+        // 시간을 기준으로 오름차순으로 정렬합니다.
+        return time - shake.time;
+    }
+};
 
 public class Main {
+    public static final int MAX_T = 250;
+    public static final int MAX_N = 100;
+    
+    public static int n, k, p, t;
+    public static int[] shakeNum = new int[MAX_N + 1];
+    public static boolean[] infected = new boolean[MAX_N + 1];
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        // 입력
+        n = sc.nextInt();
+        k = sc.nextInt();
+        p = sc.nextInt();
+        t = sc.nextInt();
+        infected[p] = true;
         
-        int N = sc.nextInt(); // number of developers
-        int K = sc.nextInt(); // number of handshakes after which a developer can no longer infect others
-        int P = sc.nextInt(); // initial infected developer
-        int T = sc.nextInt(); // number of handshakes
+        Shake[] shakes = new Shake[MAX_T];
         
-        // List to store all handshakes
-        List<Handshake> handshakes = new ArrayList<>();
-        
-        for (int i = 0; i < T; i++) {
-            int t = sc.nextInt();
-            int x = sc.nextInt();
-            int y = sc.nextInt();
-            handshakes.add(new Handshake(t, x, y));
+        for(int i = 0; i < t; i++) {
+            int time = sc.nextInt();
+            int person1 = sc.nextInt();
+            int person2 = sc.nextInt();
+            // Shake 객체를 생성해 넣어줍니다.
+            shakes[i] = new Shake(time, person1, person2);
         }
         
-        // Sort the handshakes based on the time they occurred
-        Collections.sort(handshakes, Comparator.comparingInt(h -> h.time));
+        // custom comparator를 활용한 정렬
+        Arrays.sort(shakes, 0, t);
         
-        boolean[] infected = new boolean[N + 1];
-        int[] infectionCount = new int[N + 1];
-        
-        // Initial infection
-        infected[P] = true;
-        
-        // Process each handshake in chronological order
-        for (Handshake h : handshakes) {
-            int x = h.developer1;
-            int y = h.developer2;
+        // 각 악수 횟수를 세서,
+        // K번 초과로 악수를 했을 시 전염시키지 않습니다.
+        for(int i = 0; i < t; i++) {
+            int target1 = shakes[i].person1;
+            int target2 = shakes[i].person2;
             
-            if (infected[x] && infectionCount[x] < K) {
-                if (!infected[y]) {
-                    infected[y] = true;
-                }
-                infectionCount[x]++;
-            }
+            // 감염되어 있을 경우 악수 횟수를 증가시킵니다.
+            if(infected[target1])
+                shakeNum[target1]++;
+            if(infected[target2])
+                shakeNum[target2]++;
             
-            if (infected[y] && infectionCount[y] < K) {
-                if (!infected[x]) {
-                    infected[x] = true;
-                }
-                infectionCount[y]++;
-            }
+            // target1이 감염되어 있고 아직 K번 이하로 악수했다면 target2를 전염시킵니다.
+            if(shakeNum[target1] <= k && infected[target1])
+                infected[target2] = true;
+            
+            // target2가 감염되어 있고 아직 K번 이하로 악수했다면 target1을 전염시킵니다.
+            if(shakeNum[target2] <= k && infected[target2])
+                infected[target1] = true;
         }
         
-        // Print the infection status of each developer
-        for (int i = 1; i <= N; i++) {
-            System.out.print(infected[i] ? 1 : 0);
+        for(int i = 1; i <= n; i++) {
+            if(infected[i])
+                System.out.print(1);
+            else
+                System.out.print(0);
         }
-    }
-    
-    static class Handshake {
-        int time;
-        int developer1;
-        int developer2;
         
-        Handshake(int time, int developer1, int developer2) {
-            this.time = time;
-            this.developer1 = developer1;
-            this.developer2 = developer2;
-        }
     }
 }
