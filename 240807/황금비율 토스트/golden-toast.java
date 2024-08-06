@@ -8,19 +8,17 @@ public class Main {
 
         int n = scanner.nextInt();
         int m = scanner.nextInt();
-        scanner.nextLine(); // 줄바꿈 문자를 소비합니다.
+        scanner.nextLine();
 
         String initialString = scanner.nextLine();
         LinkedList<Character> list = new LinkedList<>();
-        
-        // 초기 문자열을 LinkedList에 추가합니다.
+
         for (char c : initialString.toCharArray()) {
             list.add(c);
         }
-        
-        ListIterator<Character> it = list.listIterator(list.size()); // 초기 위치는 맨 뒤
-        
-        // 명령어 처리
+
+        ListIterator<Character> it = list.listIterator(list.size());
+
         for (int i = 0; i < m; i++) {
             String command = scanner.nextLine();
             if (command.equals("L")) {
@@ -42,12 +40,11 @@ public class Main {
             }
         }
 
-        // 최종 결과 출력
         StringBuilder result = new StringBuilder();
         for (char c : list) {
             result.append(c);
         }
-        
+
         System.out.println(result.toString());
 
         scanner.close();
