@@ -17,22 +17,22 @@ public class Main {
         ListIterator<Character> it = list.listIterator(list.size());
 
         for (int i = 0; i < m; i++) {
-            String command = scanner.nextLine();
-            if (command.equals("L")) {
+            char command = scanner.next().charAt(0);
+            if (command=='L') {
                 if (it.hasPrevious()) {
                     it.previous();
                 }
-            } else if (command.equals("R")) {
+            } else if (command=='R') {
                 if (it.hasNext()) {
                     it.next();
                 }
-            } else if (command.equals("D")) {
+            } else if (command=='D') {
                 if (it.hasNext()) {
                     it.next();
                     it.remove();
                 }
-            } else if (command.startsWith("P ")) {
-                char newChar = command.charAt(2);
+            } else if (command=='P') {
+                char newChar = scanner.next().charAt(0);
                 it.add(newChar);
             }
         }
