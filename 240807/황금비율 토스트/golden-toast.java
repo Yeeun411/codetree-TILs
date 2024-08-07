@@ -1,6 +1,4 @@
-import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,7 +7,6 @@ public class Main {
         int n = scanner.nextInt();
         int m = scanner.nextInt();
         scanner.nextLine();
-
         String initialString = scanner.nextLine();
         LinkedList<Character> list = new LinkedList<>();
 
@@ -39,14 +36,10 @@ public class Main {
                 it.add(newChar);
             }
         }
-
-        StringBuilder result = new StringBuilder();
-        for (char c : list) {
-            result.append(c);
-        }
-
-        System.out.println(result.toString());
-
-        scanner.close();
+        
+        it = list.listIterator();
+        while(it.hasNext()) {
+            System.out.print(it.next());
+        } 
     }
 }
